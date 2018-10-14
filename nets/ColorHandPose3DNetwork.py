@@ -19,8 +19,10 @@ from __future__ import print_function, unicode_literals
 
 import tensorflow as tf
 import os
+import sys
+ROOT_DIR = os.path.dirname(sys.modules['__main__'].__file__)
 
-from utils.general import *
+from hand3d.utils.general import *
 
 ops = NetworkOps
 
@@ -45,7 +47,9 @@ class ColorHandPose3DNetwork(object):
         import pickle
 
         if weight_files is None:
-            weight_files = ['./weights/handsegnet-rhd.pickle', './weights/posenet3d-rhd-stb-slr-finetuned.pickle']
+            print(ROOT_DIR)
+            print(os.getcwd())
+            weight_files = ['./hand3d/weights/handsegnet-rhd.pickle', './hand3d/weights/posenet3d-rhd-stb-slr-finetuned.pickle']
 
         # Initialize with weights
         for file_name in weight_files:

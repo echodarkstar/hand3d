@@ -20,9 +20,9 @@ from __future__ import print_function, unicode_literals
 import tensorflow as tf
 import os
 
-from utils.general import *
-from utils.canonical_trafo import *
-from utils.relative_trafo import *
+from hand3d.utils.general import *
+from hand3d.utils.canonical_trafo import *
+from hand3d.utils.relative_trafo import *
 
 ops = NetworkOps
 

@@ -410,6 +410,8 @@ def plot_hand(coords_hw, axis, color_fixed=None, linewidth='1'):
         coord1 = coords_hw[connection[0], :]
         coord2 = coords_hw[connection[1], :]
         coords = np.stack([coord1, coord2])
+        # print("COORDS ------ ",coords)
+
         if color_fixed is None:
             axis.plot(coords[:, 1], coords[:, 0], color=color, linewidth=linewidth)
         else:

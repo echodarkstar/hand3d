@@ -29,11 +29,12 @@ from utils.general import detect_keypoints, trafo_coords, plot_hand, plot_hand_3
 if __name__ == '__main__':
     # images to be shown
     image_list = list()
-    image_list.append('./data/img.png')
-    image_list.append('./data/img2.png')
-    image_list.append('./data/img3.png')
-    image_list.append('./data/img4.png')
-    image_list.append('./data/img5.png')
+    image_list.append('./hand3d/data/frame5.jpg')
+    # image_list.append('./data/img.png')
+    # image_list.append('./data/img2.png')
+    # image_list.append('./data/img3.png')
+    # image_list.append('./data/img4.png')
+    # image_list.append('./data/img5.png')
 
     # network input
     image_tf = tf.placeholder(tf.float32, shape=(1, 240, 320, 3))
@@ -55,6 +56,7 @@ if __name__ == '__main__':
     # Feed image list through network
     for img_name in image_list:
         image_raw = scipy.misc.imread(img_name)
+        # print(type(image_raw))
         image_raw = scipy.misc.imresize(image_raw, (240, 320))
         image_v = np.expand_dims((image_raw.astype('float') / 255.0) - 0.5, 0)
 
@@ -80,9 +82,17 @@ if __name__ == '__main__':
         ax3 = fig.add_subplot(223)
         ax4 = fig.add_subplot(224, projection='3d')
         ax1.imshow(image_raw)
+        # print("COORD---------" , coord_hw)
         plot_hand(coord_hw, ax1)
         ax2.imshow(image_crop_v)
         plot_hand(coord_hw_crop, ax2)
+
+        hand_map = (np.argmax(hand_scoremap_v, 2))
+        reference_map = np.zeros((hand_map.shape))
+        if (reference_map == hand_map).all():
+            print("NO HAND")
+        else:
+            print("HAND DETECTED")
         ax3.imshow(np.argmax(hand_scoremap_v, 2))
         plot_hand_3d(keypoint_coord3d_v, ax4)
         ax4.view_init(azim=-90.0, elev=-90.0)  # aligns the 3d coord with the camera view
