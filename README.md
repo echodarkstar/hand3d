@@ -4,7 +4,11 @@
 
 ColorHandPose3D is a Convolutional Neural Network estimating 3D Hand Pose from a single RGB Image. See the [project page](https://lmb.informatik.uni-freiburg.de/projects/hand3d/) for the dataset used and additional information.
 
+## Note
 
+I have modified the existing codebase to act as a package for downstream applications. The majority of the modifications are in `get_points.py`, which itself is just a modular version of the original `run.py`.
+
+-------- The following parts of this document have been retained as is. --------
 ## Usage: Forward pass
 The network ships with a minimal example, that performs a forward pass and shows the predictions.
 
