@@ -22,14 +22,18 @@ import numpy as np
 import scipy.misc
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import argparse
 
 from nets.ColorHandPose3DNetwork import ColorHandPose3DNetwork
 from utils.general import detect_keypoints, trafo_coords, plot_hand, plot_hand_3d
 
 if __name__ == '__main__':
     # images to be shown
+    parser = argparse.ArgumentParser(description='Train a model.')
+    parser.add_argument('--img', help='name of image')
+    args = parser.parse_args()
     image_list = list()
-    image_list.append('./hand3d/data/frame5.jpg')
+    image_list.append('./hand3d/data/' + args.img)
     # image_list.append('./data/img.png')
     # image_list.append('./data/img2.png')
     # image_list.append('./data/img3.png')

@@ -8,6 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 from hand3d.utils.general import *    
 from hand3d.nets.ColorHandPose3DNetwork import ColorHandPose3DNetwork
+from io import BytesIO
 
 
 def create_session():
@@ -66,11 +67,15 @@ def get_handpoints(image_raw, sess, hand_scoremap_tf, image_crop_tf, scale_tf, c
     # fig.axes.get_yaxis().set_visible(False)
 
     if (reference_map == hand_map).all():
-        return fig
+        pass
     else:
         plot_hand(coord_hw, ax1)
 
-    return fig
+    img = BytesIO()
+    fig.savefig(img, bbox_inches=0, pad_inches = 0)
+    img.seek(0)
+    fig.clf()
+    return img.read()
     # ax2.imshow(image_crop_v)
     # plot_hand(coord_hw_crop, ax2)
     # ax3.imshow(np.argmax(hand_scoremap_v, 2))
